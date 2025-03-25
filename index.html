@@ -506,7 +506,9 @@
 
     <script>
         // Configuration
-        const API_KEY = 'ecfdeb92-1709-4159-b370-705204e86795';
+        const CURRENT_MATCHES_API = 'https://api.cricapi.com/v1/currentMatches';
+        const CRIC_SCORE_API = 'https://api.cricapi.com/v1/cricScore';
+        const API_KEY = 'apikey=ecfdeb92-1709-4159-b370-705204e86795';
         const REFRESH_INTERVAL = 30000; // 30 seconds
         let refreshTimer;
         let isRefreshing = false;
@@ -541,6 +543,21 @@
         });
 
         // Fetch data from CricAPI
+        async function fetchData() {
+  try {
+    // Current matches API call
+    const currentResponse = await fetch(`${CURRENT_MATCHES_API}?${API_KEY}&offset=0`);
+    const currentData = await currentResponse.json();
+    
+    // CricScore API call
+    const scoreResponse = await fetch(`${CRIC_SCORE_API}?${API_KEY}`);
+    const scoreData = await scoreResponse.json();
+    
+    return { currentData, scoreData };
+  } catch (error) {
+    console.error("API error:", error);
+  }
+}
         async function fetchData() {
             if (isRefreshing) return;
             isRefreshing = true;
