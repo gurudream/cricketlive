@@ -542,5 +542,276 @@
             }
         }
     </script>
+    <footer>
+    <div class="footer-container">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>IPL 2025</h3>
+                <ul class="footer-links">
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="points-table.html">Points Table</a></li>
+                    <li><a href="stats.html">Player Stats</a></li>
+                    <li><a href="teams.html">Teams</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Teams</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Mumbai Indians</a></li>
+                    <li><a href="#">Chennai Super Kings</a></li>
+                    <li><a href="#">Royal Challengers</a></li>
+                    <li><a href="#">Kolkata Knight Riders</a></li>
+                    <li><a href="#">Delhi Capitals</a></li>
+                    <li><a href="#">Punjab Kings</a></li>
+                    <li><a href="#">Rajasthan Royals</a></li>
+                    <li><a href="#">Sunrisers Hyderabad</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Photos</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Mobile Apps</a></li>
+                    <li><a href="#">Fantasy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+                
+                <div class="app-download">
+                    <h4>Download App</h4>
+                    <div class="app-buttons">
+                        <a href="#" class="app-btn">
+                            <i class="fab fa-apple"></i>
+                            <span>App Store</span>
+                        </a>
+                        <a href="#" class="app-btn">
+                            <i class="fab fa-google-play"></i>
+                            <span>Play Store</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Indian_Premier_League_Official_Logo.svg/1200px-Indian_Premier_League_Official_Logo.svg.png" alt="IPL Logo" width="120">
+            </div>
+            
+            <div class="legal-links">
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Cookie Policy</a>
+                <a href="#">Contact Us</a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Indian Premier League. All Rights Reserved.</p>
+                <p class="api-credit">Data provided by <a href="https://www.cricapi.com/" target="_blank">CricAPI</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    /* Footer Styles */
+    footer {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        color: #fff;
+        padding: 3rem 1rem 1rem;
+        margin-top: 3rem;
+    }
+    
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .footer-section h3 {
+        color: #fff;
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+    
+    .footer-section h3::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 2px;
+        background-color: #9333ea;
+    }
+    
+    .footer-links {
+        list-style: none;
+    }
+    
+    .footer-links li {
+        margin-bottom: 0.8rem;
+    }
+    
+    .footer-links a {
+        color: #cbd5e1;
+        text-decoration: none;
+        transition: color 0.3s;
+        font-size: 0.9rem;
+    }
+    
+    .footer-links a:hover {
+        color: #9333ea;
+    }
+    
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .social-links a {
+        color: #fff;
+        background-color: #2d3748;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+    
+    .social-links a:hover {
+        background-color: #9333ea;
+        transform: translateY(-3px);
+    }
+    
+    .app-download h4 {
+        color: #fff;
+        margin-bottom: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .app-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .app-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: #2d3748;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: all 0.3s;
+    }
+    
+    .app-btn:hover {
+        background-color: #9333ea;
+    }
+    
+    .footer-bottom {
+        border-top: 1px solid #2d3748;
+        padding-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .footer-logo img {
+        filter: brightness(0) invert(1);
+        opacity: 0.8;
+    }
+    
+    .legal-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .legal-links a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: color 0.3s;
+    }
+    
+    .legal-links a:hover {
+        color: #9333ea;
+    }
+    
+    .copyright {
+        color: #94a3b8;
+        font-size: 0.8rem;
+    }
+    
+    .copyright p {
+        margin-bottom: 0.5rem;
+    }
+    
+    .api-credit a {
+        color: #94a3b8;
+        text-decoration: none;
+    }
+    
+    .api-credit a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .footer-section {
+            margin-bottom: 1.5rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .footer-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .app-buttons {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        
+        .app-btn {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+</style>
 </body>
 </html>
