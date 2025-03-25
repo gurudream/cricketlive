@@ -3,180 +3,1026 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Cricket Score</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <title>IPL 2025 Live Scores | Cricket Updates</title>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f0f2f5;
-            transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #222;
+            background: linear-gradient(135deg, #1e3a8a, #9333ea);
             color: white;
-            padding: 15px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-            flex-wrap: wrap;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
+        
+        nav {
+            background-color: #2563eb;
+            padding: 0.8rem;
+        }
+        
         nav ul {
-            list-style: none;
             display: flex;
-            gap: 20px;
-            padding: 0;
+            justify-content: center;
+            list-style: none;
             flex-wrap: wrap;
         }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
         nav ul li a {
             color: white;
             text-decoration: none;
-            font-size: 18px;
-            transition: color 0.3s;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s;
         }
-        nav ul li a:hover {
-            color: #ffcc00;
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #3b82f6;
+            transform: translateY(-2px);
         }
-        .theme-toggle {
-            width: 50px;
-            height: 25px;
-            background: #444;
-            border-radius: 50px;
-            position: relative;
-            cursor: pointer;
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
-        .toggle-slider {
-            width: 23px;
-            height: 23px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-            top: 1px;
-            left: 2px;
+        
+        .ipl-banner {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://assets.iplt20.com/ipl/IPLHeaderImage.webp');
+            background-size: cover;
+            background-position: center;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .ipl-banner h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .section-title {
+            color: #1e3a8a;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .match-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
-        .dark-mode .toggle-slider {
-            transform: translateX(24px);
-            background: yellow;
+        
+        .match-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
-        .dark-mode {
-            background-color: #121212;
-            color: white;
+        
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
         }
-        main {
-            padding: 20px;
+        
+        .match-series {
+            font-weight: bold;
+            color: #6b7280;
+        }
+        
+        .match-type {
+            background-color: #e5e7eb;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .teams {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .team {
+            display: flex;
+            align-items: center;
+            width: 45%;
+        }
+        
+        .team-logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            object-fit: contain;
+        }
+        
+        .team-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .team-score {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 0.3rem;
+        }
+        
+        .vs {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: #dc2626;
+        }
+        
+        .match-status {
             text-align: center;
-            min-height: 70vh;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+            font-weight: bold;
         }
-        #score-container {
-            background: white;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 10px;
-            display: inline-block;
-            width: 90%;
-            max-width: 800px;
-            min-height: 50px;
+        
+        .live-status {
+            color: #dc2626;
+            animation: blink 1.5s infinite;
         }
-        .match {
-            margin: 15px 0;
-            padding: 15px;
-            border-radius: 8px;
-            background: #f9f9f9;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        
+        .upcoming-status {
+            color: #2563eb;
         }
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: auto;
-            position: relative;
-            bottom: 0;
+        
+        .completed-status {
+            color: #16a34a;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: bold;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #2563eb;
+            color: #2563eb;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .points-table {
             width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        
+        .points-table th {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        .points-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .points-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        
+        .points-table tr:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .team-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .team-info img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .stats-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .stats-card h3 {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+        }
+        
+        .stats-list {
+            list-style: none;
+        }
+        
+        .stats-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .stats-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .refresh-info {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        
+        .refresh-btn {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background-color: #1d4ed8;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #1e3a8a, #9333ea);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .footer-links a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #a5b4fc;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #a5b4fc;
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* Responsive styles */
         @media (max-width: 768px) {
-            nav ul {
+            .teams {
                 flex-direction: column;
-                align-items: center;
+            }
+            
+            .team {
                 width: 100%;
+                margin-bottom: 1rem;
             }
-            header {
-                flex-direction: column;
-                text-align: center;
+            
+            .vs {
+                margin: 1rem 0;
+                justify-content: center;
             }
-            #score-container {
-                width: 95%;
+            
+            nav ul li {
+                margin: 0.3rem;
+            }
+            
+            .ipl-banner h1 {
+                font-size: 2rem;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <h1>Live Cricket Score</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#live-score">Live Score</a></li>
-                <li><a href="#ipl-2025">IPL 2025</a></li>
-            </ul>
-        </nav>
-        <div class="theme-toggle" id="themeToggle">
-            <div class="toggle-slider"></div>
-        </div>
+        <h1>IPL 2025 Live Scores</h1>
+        <p>Follow all the action from the Indian Premier League</p>
     </header>
-    <main>
-        <section id="live-score">
-            <h2>Live Scores</h2>
-            <div id="score-container">Loading...</div>
-        </section>
-    </main>
+    
+    <nav>
+        <ul>
+            <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Points Table</a></li>
+            <li><a href="#"><i class="fas fa-calendar-alt"></i> Schedule</a></li>
+            <li><a href="#"><i class="fas fa-star"></i> Top Performers</a></li>
+            <li><a href="#"><i class="fas fa-newspaper"></i> News</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="ipl-banner">
+            <h1>INDIAN PREMIER LEAGUE 2025</h1>
+        </div>
+        
+        <div class="refresh-info">
+            Last updated: <span id="lastUpdated">Just now</span> | 
+            <button class="refresh-btn" id="manualRefresh">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <span id="apiStatus"></span>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="live">Live Matches</div>
+            <div class="tab" data-tab="upcoming">Upcoming</div>
+            <div class="tab" data-tab="results">Results</div>
+            <div class="tab" data-tab="points">Points Table</div>
+            <div class="tab" data-tab="stats">Statistics</div>
+        </div>
+        
+        <div class="tab-content active" id="live-tab">
+            <h2 class="section-title"><i class="fas fa-bolt"></i> Live Matches</h2>
+            <div id="liveMatches">
+                <div class="match-card">
+                    <div class="teams">
+                        <p>Loading live matches...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="upcoming-tab">
+            <h2 class="section-title"><i class="fas fa-calendar"></i> Upcoming Matches</h2>
+            <div id="upcomingMatches">
+                <div class="match-card">
+                    <div class="teams">
+                        <p>Loading upcoming matches...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="results-tab">
+            <h2 class="section-title"><i class="fas fa-list-alt"></i> Recent Results</h2>
+            <div id="recentResults">
+                <div class="match-card">
+                    <div class="teams">
+                        <p>Loading recent results...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="points-tab">
+            <h2 class="section-title"><i class="fas fa-trophy"></i> Points Table</h2>
+            <div id="pointsTable">
+                <table class="points-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Team</th>
+                            <th>P</th>
+                            <th>W</th>
+                            <th>L</th>
+                            <th>NR</th>
+                            <th>Pts</th>
+                            <th>NRR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="8">Loading points table...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="stats-tab">
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> Statistics</h2>
+            <div id="statsContent">
+                <div class="stats-card">
+                    <h3>Orange Cap (Most Runs)</h3>
+                    <ul class="stats-list" id="orangeCap">
+                        <li>Loading...</li>
+                    </ul>
+                </div>
+                
+                <div class="stats-card">
+                    <h3>Purple Cap (Most Wickets)</h3>
+                    <ul class="stats-list" id="purpleCap">
+                        <li>Loading...</li>
+                    </ul>
+                </div>
+                
+                <div class="stats-card">
+                    <h3>Most Sixes</h3>
+                    <ul class="stats-list" id="mostSixes">
+                        <li>Loading...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <footer>
-        <p>&copy; 2025 Live Cricket Score. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">About IPL</a>
+            <a href="#">Teams</a>
+            <a href="#">Venues</a>
+            <a href="#">Archives</a>
+            <a href="#">Contact</a>
+        </div>
+        <p>© 2025 Indian Premier League. All Rights Reserved.</p>
+        <p class="copyright">Data provided by CricAPI | API hits used: <span id="apiHits">0</span>/100 (daily limit)</p>
     </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggle = document.getElementById('themeToggle');
-            toggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        // Configuration
+        const API_KEY = 'ecfdeb92-1709-4159-b370-705204e86795';
+        const REFRESH_INTERVAL = 30000; // 30 seconds
+        let refreshTimer;
+        let isRefreshing = false;
+
+        // DOM Elements
+        const lastUpdated = document.getElementById('lastUpdated');
+        const manualRefreshBtn = document.getElementById('manualRefresh');
+        const apiStatusElement = document.getElementById('apiStatus');
+        const apiHitsElement = document.getElementById('apiHits');
+
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
             });
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('dark-mode');
-            }
-            async function fetchLiveScores() {
-                try {
-                    let response = await fetch('https://api.cricapi.com/v1/currentMatches?apikey=ecfdeb92-1709-4159-b370-705204e86795');
-                    let data = await response.json();
-                    let scoreContainer = document.getElementById('score-container');
-                    scoreContainer.innerHTML = '';
-                    if (!data || !data.data || data.data.length === 0) {
-                        scoreContainer.innerHTML = 'No live matches available.';
-                        return;
-                    }
-                    data.data.forEach(match => {
-                        if (match.status === 'Live') {
-                            let matchDiv = document.createElement('div');
-                            matchDiv.classList.add('match');
-                            matchDiv.innerHTML = `<strong>${match.teams[0]} vs ${match.teams[1]}</strong><br>Score: ${match.score ? match.score : 'N/A'}`;
-                            scoreContainer.appendChild(matchDiv);
-                        }
-                    });
-                } catch (error) {
-                    console.error('Error fetching live scores:', error);
-                    document.getElementById('score-container').innerHTML = 'Failed to load scores. Please try again later.';
-                }
-            }
-            fetchLiveScores();
-            setInterval(fetchLiveScores, 60000);
         });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchData();
+            setupAutoRefresh();
+        });
+
+        // Fetch data from CricAPI
+        async function fetchData() {
+            if (isRefreshing) return;
+            isRefreshing = true;
+            apiStatusElement.textContent = "Loading data...";
+            
+            try {
+                // Fetch current matches (including live and recent)
+                const currentMatchesResponse = await fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${ecfdeb92-1709-4159-b370-705204e86795}&offset=0`);
+                const currentMatchesData = await currentMatchesResponse.json();
+                
+                // Fetch all matches (including upcoming)
+                const allMatchesResponse = await fetch(`https://api.cricapi.com/v1/cricScore?apikey=${ecfdeb92-1709-4159-b370-705204e86795}`);
+                const allMatchesData = await allMatchesResponse.json();
+                
+                if (currentMatchesData.status !== "success" || allMatchesData.status !== "success") {
+                    throw new Error("API request failed");
+                }
+                
+                // Update API hits counter
+                if (currentMatchesData.info) {
+                    apiHitsElement.textContent = currentMatchesData.info.hitsUsed + allMatchesData.info.hitsUsed;
+                }
+                
+                // Process and render matches
+                renderMatches(currentMatchesData.data, allMatchesData.data);
+                
+                apiStatusElement.textContent = "Last updated: " + new Date().toLocaleTimeString();
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                apiStatusElement.textContent = "Error: " + error.message;
+            } finally {
+                isRefreshing = false;
+            }
+        }
+
+        // Render matches
+        function renderMatches(currentMatches, allMatches) {
+            if (!currentMatches || !allMatches) return;
+            
+            // Filter IPL matches from both APIs
+            const iplCurrentMatches = currentMatches.filter(match => 
+                match.series_id === 'ecfdeb92-1709-4159-b370-705204e86795' // IPL series ID from currentMatches API
+            );
+            
+            const iplAllMatches = allMatches.data.filter(match => 
+                match.series.includes('Indian Premier League') || 
+                match.series.includes('IPL')
+            );
+            
+            // Combine and process matches
+            processAndRenderLiveMatches(iplCurrentMatches, iplAllMatches);
+            processAndRenderUpcomingMatches(iplAllMatches);
+            processAndRenderResults(iplCurrentMatches, iplAllMatches);
+            renderPointsTable();
+            renderStats();
+        }
+
+        // Process and render live matches
+        function processAndRenderLiveMatches(iplCurrentMatches, iplAllMatches) {
+            const liveMatchesContainer = document.getElementById('liveMatches');
+            
+            // Find live matches (started but not ended)
+            const liveMatches = iplCurrentMatches.filter(match => 
+                match.matchStarted && !match.matchEnded
+            );
+            
+            if (liveMatches.length === 0) {
+                // Check the other API for live matches
+                const alternativeLiveMatches = iplAllMatches.filter(match => 
+                    match.ms === "live"
+                );
+                
+                if (alternativeLiveMatches.length === 0) {
+                    liveMatchesContainer.innerHTML = `
+                        <div class="match-card">
+                            <div class="teams">
+                                <p>No live IPL matches currently</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                renderMatchesFromCricScore(alternativeLiveMatches, liveMatchesContainer, true);
+                return;
+            }
+            
+            let html = '';
+            liveMatches.forEach(match => {
+                const team1 = match.teams[0] || "Team 1";
+                const team2 = match.teams[1] || "Team 2";
+                
+                // Find team logos from the other API if available
+                const teamInfo = iplAllMatches.find(m => 
+                    (m.t1.includes(team1.split(' ')[0]) || 
+                    (m.t2.includes(team1.split(' ')[0])
+                );
+                
+                const team1Logo = teamInfo?.t1img || "https://h.cricapi.com/img/icon512.png";
+                const team2Logo = teamInfo?.t2img || "https://h.cricapi.com/img/icon512.png";
+                
+                // Format scores
+                let scoresHtml = '';
+                if (match.score && match.score.length > 0) {
+                    match.score.forEach(inning => {
+                        scoresHtml += `<p>${inning.inning}: ${inning.r}/${inning.w} (${inning.o} ov)</p>`;
+                    });
+                } else {
+                    scoresHtml = `<p>Match in progress</p>`;
+                }
+                
+                html += `
+                    <div class="match-card">
+                        <div class="match-header">
+                            <span class="match-series">Indian Premier League 2025</span>
+                            <span class="match-type">${match.matchType.toUpperCase()}</span>
+                        </div>
+                        <div class="teams">
+                            <div class="team">
+                                <img src="${team1Logo}" alt="${team1}" class="team-logo">
+                                <div>
+                                    <div class="team-name">${team1}</div>
+                                    ${match.score && match.score.length > 0 && match.score[0].inning.includes(team1) ? 
+                                        `<div class="team-score">${match.score[0].r}/${match.score[0].w} (${match.score[0].o} ov)</div>` : 
+                                        ''}
+                                </div>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team">
+                                <img src="${team2Logo}" alt="${team2}" class="team-logo">
+                                <div>
+                                    <div class="team-name">${team2}</div>
+                                    ${match.score && match.score.length > 1 && match.score[1].inning.includes(team2) ? 
+                                        `<div class="team-score">${match.score[1].r}/${match.score[1].w} (${match.score[1].o} ov)</div>` : 
+                                        ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="match-status live-status">LIVE: ${match.status}</div>
+                    </div>
+                `;
+            });
+            
+            liveMatchesContainer.innerHTML = html;
+        }
+
+        // Process and render upcoming matches
+        function processAndRenderUpcomingMatches(iplAllMatches) {
+            const upcomingMatchesContainer = document.getElementById('upcomingMatches');
+            
+            // Find upcoming matches (fixtures)
+            const upcomingMatches = iplAllMatches.filter(match => 
+                match.ms === "fixture"
+            ).sort((a, b) => new Date(a.dateTimeGMT) - new Date(b.dateTimeGMT));
+            
+            if (upcomingMatches.length === 0) {
+                upcomingMatchesContainer.innerHTML = `
+                    <div class="match-card">
+                        <div class="teams">
+                            <p>No upcoming IPL matches scheduled</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            renderMatchesFromCricScore(upcomingMatches.slice(0, 5), upcomingMatchesContainer, false);
+        }
+
+        // Process and render results
+        function processAndRenderResults(iplCurrentMatches, iplAllMatches) {
+            const resultsContainer = document.getElementById('recentResults');
+            
+            // Find completed matches from both APIs
+            const completedMatches1 = iplCurrentMatches.filter(match => 
+                match.matchEnded
+            );
+            
+            const completedMatches2 = iplAllMatches.filter(match => 
+                match.ms === "result"
+            );
+            
+            // Combine and sort by date (newest first)
+            const allCompletedMatches = [...completedMatches1, ...completedMatches2]
+                .sort((a, b) => new Date(b.dateTimeGMT || b.date) - new Date(a.dateTimeGMT || a.date));
+            
+            if (allCompletedMatches.length === 0) {
+                resultsContainer.innerHTML = `
+                    <div class="match-card">
+                        <div class="teams">
+                            <p>No recent IPL match results</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Render matches from both APIs
+            let html = '';
+            allCompletedMatches.slice(0, 5).forEach(match => {
+                if (match.ms === "result") {
+                    // From cricScore API
+                    html += `
+                        <div class="match-card">
+                            <div class="match-header">
+                                <span class="match-series">${match.series}</span>
+                                <span class="match-type">${match.matchType.toUpperCase()}</span>
+                            </div>
+                            <div class="teams">
+                                <div class="team">
+                                    <img src="${match.t1img || 'https://h.cricapi.com/img/icon512.png'}" alt="${match.t1}" class="team-logo">
+                                    <div>
+                                        <div class="team-name">${match.t1}</div>
+                                        ${match.t1s ? `<div class="team-score">${match.t1s}</div>` : ''}
+                                    </div>
+                                </div>
+                                <div class="vs">VS</div>
+                                <div class="team">
+                                    <img src="${match.t2img || 'https://h.cricapi.com/img/icon512.png'}" alt="${match.t2}" class="team-logo">
+                                    <div>
+                                        <div class="team-name">${match.t2}</div>
+                                        ${match.t2s ? `<div class="team-score">${match.t2s}</div>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="match-status completed-status">${match.status}</div>
+                        </div>
+                    `;
+                } else {
+                    // From currentMatches API
+                    const team1 = match.teams[0] || "Team 1";
+                    const team2 = match.teams[1] || "Team 2";
+                    
+                    // Find team logos from the other API if available
+                    const teamInfo = iplAllMatches.find(m => 
+                        (m.t1.includes(team1.split(' ')[0]) || 
+                        (m.t2.includes(team1.split(' ')[0])
+                    );
+                    
+                    const team1Logo = teamInfo?.t1img || "https://h.cricapi.com/img/icon512.png";
+                    const team2Logo = teamInfo?.t2img || "https://h.cricapi.com/img/icon512.png";
+                    
+                    // Format scores
+                    let scoresHtml = '';
+                    if (match.score && match.score.length > 0) {
+                        match.score.forEach(inning => {
+                            scoresHtml += `<p>${inning.inning}: ${inning.r}/${inning.w} (${inning.o} ov)</p>`;
+                        });
+                    }
+                    
+                    html += `
+                        <div class="match-card">
+                            <div class="match-header">
+                                <span class="match-series">Indian Premier League 2025</span>
+                                <span class="match-type">${match.matchType.toUpperCase()}</span>
+                            </div>
+                            <div class="teams">
+                                <div class="team">
+                                    <img src="${team1Logo}" alt="${team1}" class="team-logo">
+                                    <div>
+                                        <div class="team-name">${team1}</div>
+                                        ${match.score && match.score.length > 0 && match.score[0].inning.includes(team1) ? 
+                                            `<div class="team-score">${match.score[0].r}/${match.score[0].w} (${match.score[0].o} ov)</div>` : 
+                                            ''}
+                                    </div>
+                                </div>
+                                <div class="vs">VS</div>
+                                <div class="team">
+                                    <img src="${team2Logo}" alt="${team2}" class="team-logo">
+                                    <div>
+                                        <div class="team-name">${team2}</div>
+                                        ${match.score && match.score.length > 1 && match.score[1].inning.includes(team2) ? 
+                                            `<div class="team-score">${match.score[1].r}/${match.score[1].w} (${match.score[1].o} ov)</div>` : 
+                                            ''}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="match-status completed-status">${match.status}</div>
+                        </div>
+                    `;
+                }
+            });
+            
+            resultsContainer.innerHTML = html;
+        }
+
+        // Helper function to render matches from cricScore API
+        function renderMatchesFromCricScore(matches, container, isLive) {
+            let html = '';
+            matches.forEach(match => {
+                html += `
+                    <div class="match-card">
+                        <div class="match-header">
+                            <span class="match-series">${match.series}</span>
+                            <span class="match-type">${match.matchType.toUpperCase()}</span>
+                        </div>
+                        <div class="teams">
+                            <div class="team">
+                                <img src="${match.t1img || 'https://h.cricapi.com/img/icon512.png'}" alt="${match.t1}" class="team-logo">
+                                <div>
+                                    <div class="team-name">${match.t1}</div>
+                                    ${match.t1s ? `<div class="team-score">${match.t1s}</div>` : ''}
+                                </div>
+                            </div>
+                            <div class="vs">VS</div>
+                            <div class="team">
+                                <img src="${match.t2img || 'https://h.cricapi.com/img/icon512.png'}" alt="${match.t2}" class="team-logo">
+                                <div>
+                                    <div class="team-name">${match.t2}</div>
+                                    ${match.t2s ? `<div class="team-score">${match.t2s}</div>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="match-status ${isLive ? 'live-status' : 'upcoming-status'}">
+                            ${isLive ? 'LIVE: ' + match.status : new Date(match.dateTimeGMT).toLocaleString()}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Render points table (placeholder - would need another API endpoint)
+        function renderPointsTable() {
+            const pointsTable = document.querySelector('#pointsTable table');
+            
+            // This is a placeholder - in a real app you would fetch this from an API
+            pointsTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Team</th>
+                        <th>P</th>
+                        <th>W</th>
+                        <th>L</th>
+                        <th>NR</th>
+                        <th>Pts</th>
+                        <th>NRR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <div class="team-info">
+                                <img src="https://g.cricapi.com/iapi/206-637852958714346149.png?w=48" alt="KKR">
+                                <span>Kolkata Knight Riders</span>
+                            </div>
+                        </td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>8</td>
+                        <td>+1.250</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <div class="team-info">
+                                <img src="https://g.cricapi.com/iapi/135-637852956181378533.png?w=48" alt="CSK">
+                                <span>Chennai Super Kings</span>
+                            </div>
+                        </td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>6</td>
+                        <td>+0.850</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <div class="team-info">
+                                <img src="https://g.cricapi.com/iapi/251-637852956607161886.png?w=48" alt="RR">
+                                <span>Rajasthan Royals</span>
+                            </div>
+                        </td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>6</td>
+                        <td>+0.720</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <div class="team-info">
+                                <img src="https://g.cricapi.com/iapi/279-637852957609490368.png?w=48" alt="SRH">
+                                <span>Sunrisers Hyderabad</span>
+                            </div>
+                        </td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>6</td>
+                        <td>+0.650</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <div class="team-info">
+                                <img src="https://g.cricapi.com/iapi/148-637874596301457910.png?w=48" alt="DC">
+                                <span>Delhi Capitals</span>
+                            </div>
+                        </td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>6</td>
+                        <td>+0.420</td>
+                    </tr>
+                </tbody>
+            `;
+        }
+
+        // Render stats (placeholder - would need another API endpoint)
+        function renderStats() {
+            // These are placeholder stats - in a real app you would fetch from an API
+            document.getElementById('orangeCap').innerHTML = `
+                <li><span>Virat Kohli (RCB)</span><span>342 runs</span></li>
+                <li><span>Shubman Gill (GT)</span><span>298 runs</span></li>
+                <li><span>Ruturaj Gaikwad (CSK)</span><span>276 runs</span></li>
+                <li><span>Jos Buttler (RR)</span><span>265 runs</span></li>
+                <li><span>KL Rahul (LSG)</span><span>248 runs</span></li>
+            `;
+            
+            document.getElementById('purpleCap').innerHTML = `
+                <li><span>Jasprit Bumrah (MI)</span><span>14 wickets</span></li>
+                <li><span>Yuzvendra Chahal (RR)</span><span>12 wickets</span></li>
+                <li><span>Mohammed Shami (GT)</span><span>11 wickets</span></li>
+                <li><span>Rashid Khan (GT)</span><span>10 wickets</span></li>
+                <li><span>Arshdeep Singh (PBKS)</span><span>9 wickets</span></li>
+            `;
+            
+            document.getElementById('mostSixes').innerHTML = `
+                <li><span>Rohit Sharma (MI)</span><span>18 sixes</span></li>
+                <li><span>Andre Russell (KKR)</span><span>16 sixes</span></li>
+                <li><span>Nicholas Pooran (LSG)</span><span>15 sixes</span></li>
+                <li><span>Glenn Maxwell (RCB)</span><span>14 sixes</span></li>
+                <li><span>Shivam Dube (CSK)</span><span>12 sixes</span></li>
+            `;
+        }
+
+        // Setup auto-refresh
+        function setupAutoRefresh() {
+            clearInterval(refreshTimer);
+            refreshTimer = setInterval(() => {
+                fetchData();
+            }, REFRESH_INTERVAL);
+        }
+
+        // Manual refresh
+        manualRefreshBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            manualRefresh();
+        });
+
+        function manualRefresh() {
+            clearInterval(refreshTimer);
+            
+            // Add visual feedback
+            manualRefreshBtn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Refreshing...';
+            apiStatusElement.textContent = "Refreshing data...";
+            
+            fetchData();
+            setupAutoRefresh();
+            
+            setTimeout(() => {
+                manualRefreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
+            }, 1000);
+        }
+
+        // Auto-update last updated time every minute
+        setInterval(() => {
+            lastUpdated.textContent = new Date().toLocaleTimeString();
+        }, 60000);
     </script>
 </body>
 </html>
